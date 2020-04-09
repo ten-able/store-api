@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: store-site
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: nagadheeranreddyseelam
+Implementation-Vendor-Id: org.cstore.app
+Build-Jdk: 1.8.0_242
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/store-site
+Created-By: Maven Integration for Eclipse
+
