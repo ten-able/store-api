@@ -5,7 +5,6 @@ import static org.springframework.http.HttpStatus.CREATED;
 import java.util.List;
 import java.util.Optional;
 
-import org.cstore.app.store_site.entity.User;
 import org.cstore.app.store_site.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.cstore.app.store_site.entity.AUser;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,31 +35,31 @@ public class UserController {
     }
 
     @GetMapping("")
-    public List<User> getUsers() {
+    public List<AUser> getUsers() {
         log.info("process=get-users");
         return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id) {
+    public ResponseEntity<AUser> getUser(@PathVariable Long id) {
         log.info("process=get-user, user_id={}", id);
-        Optional<User> user = userService.getUserById(id);
+        Optional<AUser> user = userService.getUserById(id);
         return user.map( u -> ResponseEntity.ok(u))
                    .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping("")
     @ResponseStatus(CREATED)
-    public User createUser(@RequestBody User user) {
+    public Optional<AUser> createUser(@RequestBody AUser user) {
         log.info("process=create-user, user_email={}", user.getEmail());
-        return userService.createUser(user);
+        return userService.createUser(Optional.of(user));
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
-        log.info("process=update-user, user_id={}", id);
-        user.setId(id);
-        return userService.updateUser(user);
+    public Optional<AUser>  updateUser(@PathVariable Long id, @RequestBody AUser user) {
+        log.info("process=update-user, UserId={}", id);
+        user.setUserId(id);
+        return userService.updateUser(Optional.of(user));
     }
 
     @DeleteMapping("/{id}")

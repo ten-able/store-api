@@ -5,7 +5,6 @@ import static org.springframework.http.HttpStatus.CREATED;
 import java.util.List;
 import java.util.Optional;
 
-import org.cstore.app.store_site.entity.Product;
 import org.cstore.app.store_site.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.cstore.app.store_site.entity.Product;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,9 +44,9 @@ public class ProductController {
 	}
 	
 	@GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(Long prodId){
-		 log.info("process=getProductById, product id={}",prodId);
-		 Optional<Product> product = productService.getProductById(prodId);
+    public ResponseEntity<Product> getProductById(@PathVariable Long id){
+		 log.info("process=getProductById, product id={}",id);
+		 Optional<Product> product = productService.getProductById(id);
 		 return product.map(p->ResponseEntity.ok(p))
 		 		.orElse(ResponseEntity.notFound().build());
 	}
@@ -53,14 +54,14 @@ public class ProductController {
 	@PostMapping("")
     @ResponseStatus(CREATED)
     public Product createProduct(@RequestBody Product product) {
-        log.info("process=create-product, product name={}", product.getProduct_name());
+        log.info("process=create-product, product name={}", product.getProductName());
         return productService.createProduct(product);
     }
 
     @PutMapping("/{id}")
     public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
         log.info("process=update-product, product_id={}", id);
-        product.setProduct_id(id);
+        product.setProductId(id);
         return productService.updateProduct(product);
     }
 

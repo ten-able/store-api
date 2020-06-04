@@ -1,41 +1,48 @@
 package org.cstore.app.store_site.service;
 
-import org.cstore.app.store_site.entity.User;
+import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import org.cstore.app.store_site.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import com.cstore.app.store_site.entity.AUser;
 
 @Service
 @Transactional
 public class UserService {
-    private final UserRepository userRepository;
+	@Autowired
+    private UserRepository userRepository;
 
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    
+    public UserService() {
+       // this.userRepository = userRepository;
     }
 
-    public Optional<User> getUserById(Long id) {
+    public Optional<AUser> getUserById(Long id) {
         return userRepository.findById(id);
     }
 
-    public List<User> getAllUsers() {
+    public List<AUser> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public Optional<AUser> createUser(Optional<AUser> user) {
+        return Optional.of(userRepository.save(user.get()));
     }
 
-    public User updateUser(User user) {
-        return userRepository.save(user);
+    public Optional<AUser> updateUser(Optional<AUser> user) {
+        return Optional.of(userRepository.save(user.get()));
     }
 
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
+    }
+    
+    public void addUserRole(Long userId, Long roleId) {
+    	
     }
 }
