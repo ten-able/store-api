@@ -26,6 +26,9 @@ public class StoreCart implements Serializable {
 
 	@Column(length=50)
 	private String status;
+	
+	@Column
+	private Double  total;
 
 	//bi-directional many-to-one association to CartItem
 	@OneToMany(mappedBy="storeCart")
@@ -105,5 +108,7 @@ public class StoreCart implements Serializable {
 	public void setStore(Store store) {
 		this.store = store;
 	}
+	
+	
 
 }

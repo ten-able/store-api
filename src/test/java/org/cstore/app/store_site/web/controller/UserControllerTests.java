@@ -1,28 +1,37 @@
-package org.cstore.app.store_site.web.controller;
-
-import org.cstore.app.store_site.service.UserService;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-@RunWith(SpringRunner.class)
-@WebMvcTest(controllers = UserController.class)
-public class UserControllerTests {
-
-    @MockBean
-    UserService userService;
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    ObjectMapper objectMapper = new ObjectMapper();
-
-//    Optional<User> existingUser, newUser, updateUser;
+//package org.cstore.app.store_site.web.controller;
+//
+//import java.util.Arrays;
+//import java.util.Optional;
+//
+//import org.cstore.app.store_site.entity.RoleType;
+//import org.cstore.app.store_site.service.UserService;
+//import org.cstore.app.store_site.utils.TestHelper;
+//import org.junit.Before;
+//import org.junit.jupiter.api.Test;
+//import org.junit.runner.RunWith;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+//import org.springframework.boot.test.mock.mockito.MockBean;
+//import org.springframework.http.MediaType;
+//import org.springframework.test.context.junit4.SpringRunner;
+//import org.springframework.test.web.servlet.MockMvc;
+//
+//import com.cstore.app.store_site.entity.AUser;
+//import com.fasterxml.jackson.databind.ObjectMapper;
+//
+//@RunWith(SpringRunner.class)
+//@WebMvcTest(controllers = UserController.class)
+//public class UserControllerTests {
+//
+//    @MockBean
+//    UserService userService;
+//
+//    @Autowired
+//    private MockMvc mockMvc;
+//
+//    ObjectMapper objectMapper = new ObjectMapper();
+//
+//    Optional<AUser> existingUser, newUser, updateUser;
 //
 //    @Before
 //    public void setUp() {
@@ -55,7 +64,7 @@ public class UserControllerTests {
 //
 //    @Test
 //    public void should_create_user() throws Exception {
-//        given(userService.createUser(newUser)).willReturn(newUser);
+//        given(userService.createUser(newUser,RoleType.StoreAdmin)).willReturn(newUser);
 //
 //        this.mockMvc
 //                .perform(post("/api/users/")
@@ -91,5 +100,5 @@ public class UserControllerTests {
 //                .perform(delete("/api/users/"+existingUser.get().getUserId()))
 //                .andExpect(status().isOk());
 //    }
-
-}
+//
+//}

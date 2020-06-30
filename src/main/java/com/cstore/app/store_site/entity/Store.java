@@ -59,6 +59,9 @@ public class Store implements Serializable {
 
 	@Column(length=10)
 	private String zip;
+	
+	@Column(length=10)
+	private String status;
 
 	//bi-directional many-to-one association to AOrder
 	@OneToMany(mappedBy="store")
@@ -279,4 +282,14 @@ public class Store implements Serializable {
 		return storeUser;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	
+	
 }

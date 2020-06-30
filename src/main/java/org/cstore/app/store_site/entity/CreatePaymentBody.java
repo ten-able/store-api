@@ -4,19 +4,17 @@ import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
 
+
+@Data
 public class CreatePaymentBody {
 
-	@SerializedName("items")
-    Object[] items;
+
+	
+	Long userId;
+	Long cartId;
 
     @SerializedName("currency")
     String currency;
 
-    public Object[] getItems() {
-        return items;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
+  
 }

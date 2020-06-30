@@ -21,7 +21,11 @@ public class OrderItem implements Serializable {
 	@Column(name="created_on")
 	private Timestamp createdOn;
 
+	@Column
 	private Integer quantity;
+	
+	@Column(name="item_price")
+	private Double itemPrice;
 
 	//bi-directional many-to-one association to AOrder
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -76,4 +80,13 @@ public class OrderItem implements Serializable {
 		this.storeProduct = storeProduct;
 	}
 
+	public Double getItemPrice() {
+		return itemPrice;
+	}
+
+	public void setItemPrice(Double itemPrice) {
+		this.itemPrice = itemPrice;
+	}
+
+	
 }

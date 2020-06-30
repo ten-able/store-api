@@ -24,17 +24,20 @@ public class CustomerPayment implements Serializable {
 	private BigDecimal amount;
 
 	@Column(name="order_id", nullable=false)
-	private Integer orderId;
+	private Long orderId;
 
 	@Column(length=2147483647)
 	private String status;
 
 	@Column(name="vendor_txn_id", length=2147483647)
 	private String vendorTxnId;
+	
+	@Column(name="pay_intent_id")
+	private String payIntentId;
 
 	//bi-directional many-to-one association to PaymentType
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="paytype_id", nullable=false)
+	@JoinColumn(name="pay_type_id", nullable=false)
 	private PaymentType paymentType;
 
 	public CustomerPayment() {
@@ -56,11 +59,11 @@ public class CustomerPayment implements Serializable {
 		this.amount = amount;
 	}
 
-	public Integer getOrderId() {
+	public Long getOrderId() {
 		return this.orderId;
 	}
 
-	public void setOrderId(Integer orderId) {
+	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
 
@@ -87,5 +90,15 @@ public class CustomerPayment implements Serializable {
 	public void setPaymentType(PaymentType paymentType) {
 		this.paymentType = paymentType;
 	}
+
+	public String getPayIntentId() {
+		return payIntentId;
+	}
+
+	public void setPayIntentId(String payIntentId) {
+		this.payIntentId = payIntentId;
+	}
+	
+	
 
 }

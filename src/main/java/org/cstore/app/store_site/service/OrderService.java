@@ -32,5 +32,9 @@ public class OrderService {
 	public AOrder updateOrder(AOrder order) {
 		return orderRepo.save(order);
 	}
+	
+	public AOrder findOrderByCustomerId(Long customerId) {
+		return orderRepo.findOrderByCustomerId(customerId);
+	}
 
 }

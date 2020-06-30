@@ -5,6 +5,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 import java.util.List;
 import java.util.Optional;
 
+import org.cstore.app.store_site.entity.RoleType;
 import org.cstore.app.store_site.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -52,7 +53,7 @@ public class UserController {
     @ResponseStatus(CREATED)
     public Optional<AUser> createUser(@RequestBody AUser user) {
         log.info("process=create-user, user_email={}", user.getEmail());
-        return userService.createUser(Optional.of(user));
+        return userService.createUser(Optional.of(user), RoleType.StoreAdmin);
     }
 
     @PutMapping("/{id}")

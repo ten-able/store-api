@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,14 +27,21 @@ public class OrderRepository {
 	}
 
 	public Optional<AOrder> findById(Long orderId) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Optional<AOrder>)entityManager.createQuery("from AOrder where order_id=?").setParameter(1, orderId).getSingleResult();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<AOrder> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<AOrder>)entityManager.createQuery("from AOrder").getResultList();
 	}
+	
+	public AOrder findOrderByCustomerId(Long customerId) {
+		Query query = entityManager.createNamedQuery("from AOrder where customer=?");
+		query.setParameter(1, customerId);
+		return (AOrder) query.getSingleResult();
+	}
+	
+
 	
 
 }

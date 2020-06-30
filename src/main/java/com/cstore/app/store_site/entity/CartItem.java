@@ -22,6 +22,9 @@ public class CartItem implements Serializable {
 	private Timestamp createdOn;
 
 	private Integer quantity;
+	
+	@Column(name="item_price")
+	private double  itemPrice;
 
 	//bi-directional many-to-one association to StoreCart
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -68,4 +71,14 @@ public class CartItem implements Serializable {
 		this.storeProduct = storeProduct;
 	}
 
+	public double getItemPrice() {
+		return itemPrice;
+	}
+
+	public void setItemPrice(double itemPrice) {
+		this.itemPrice = itemPrice;
+	}
+
+
+	
 }

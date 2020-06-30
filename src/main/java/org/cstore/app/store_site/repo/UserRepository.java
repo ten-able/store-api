@@ -8,7 +8,9 @@ import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cstore.app.store_site.entity.ARole;
 import com.cstore.app.store_site.entity.AUser;
+import com.cstore.app.store_site.entity.UserRole;
 
 @Repository
 public class UserRepository {
