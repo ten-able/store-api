@@ -30,7 +30,7 @@ public class StoreProductRepository {
 	
 	
 	public Optional<StoreProduct> findById(Long storeProductId) {
-		return (Optional<StoreProduct>)entityManager.createQuery("from StoreProducgt where storeProductId=?").setParameter(1, storeProductId).getSingleResult();
+		return Optional.of((StoreProduct)entityManager.createQuery("from StoreProduct where storeProductId=?1").setParameter(1, storeProductId).getSingleResult());
 	}
 	
 	public List<StoreProduct> findAll() {

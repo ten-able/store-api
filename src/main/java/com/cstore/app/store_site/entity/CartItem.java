@@ -2,6 +2,9 @@ package com.cstore.app.store_site.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Timestamp;
 
 
@@ -27,11 +30,13 @@ public class CartItem implements Serializable {
 	private double  itemPrice;
 
 	//bi-directional many-to-one association to StoreCart
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="cart_id", nullable=false,insertable=false, updatable=false)
 	private StoreCart storeCart;
 
 	//bi-directional many-to-one association to StoreProduct
+	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="store_product_id", nullable=false, insertable=false, updatable=false)
 	private StoreProduct storeProduct;
@@ -77,6 +82,14 @@ public class CartItem implements Serializable {
 
 	public void setItemPrice(double itemPrice) {
 		this.itemPrice = itemPrice;
+	}
+
+	public CartItemPK getId() {
+		return id;
+	}
+
+	public void setId(CartItemPK id) {
+		this.id = id;
 	}
 
 

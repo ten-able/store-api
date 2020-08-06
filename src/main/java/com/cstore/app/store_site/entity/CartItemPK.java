@@ -9,10 +9,10 @@ import javax.persistence.Embeddable;
 public class CartItemPK implements Serializable{
 	
 	@Column(name="cart_id", insertable=false, updatable=false, unique=true, nullable=false)
-	private Integer cartId;
+	private Long cartId;
 
 	@Column(name="store_product_id", insertable=false, updatable=false, unique=true, nullable=false)
-	private Integer storeProductId;
+	private Long storeProductId;
 	
 	
 	public CartItemPK(){
@@ -20,22 +20,22 @@ public class CartItemPK implements Serializable{
 	}
 
 
-	public Integer getCartId() {
+	public Long getCartId() {
 		return cartId;
 	}
 
 
-	public void setCartId(Integer cartId) {
+	public void setCartId(Long cartId) {
 		this.cartId = cartId;
 	}
 
 
-	public Integer getStoreProductId() {
+	public Long getStoreProductId() {
 		return storeProductId;
 	}
 
 
-	public void setStoreProductId(Integer storeProductId) {
+	public void setStoreProductId(Long storeProductId) {
 		this.storeProductId = storeProductId;
 	}
 	

@@ -22,19 +22,22 @@ public class CartRepository {
 	public StoreCart save(StoreCart cart){
 
 		entityManager.persist(cart);
+		cart.getCartItems().forEach(item -> {
+			entityManager.persist(item);
+		});
 		return cart;
 	}
 	
 	public List<StoreCart> findCartByCustomerId(Long customerId) {
-		return (List<StoreCart>) entityManager.createQuery("from StoreCart where customer=? and status='ACTIVE'").setParameter(1, customerId).getResultList();
+		return (List<StoreCart>) entityManager.createQuery("from StoreCart where customer=?1 and status='ACTIVE'").setParameter(1, customerId).getResultList();
 	}
 	
 	public Optional<StoreCart> findById(Long cartId) {
-		return (Optional<StoreCart>) entityManager.createQuery("from StoreCart where cartId=? and status='ACTIVE'").setParameter(1, cartId).getSingleResult();
+		return Optional.of((StoreCart)entityManager.createQuery("from StoreCart where cartId=?1 and status='ACTIVE'").setParameter(1, cartId).getSingleResult());
 	}
 	
 	public List<StoreCart>  findByStoreId(Long storeId) {
-		return (List<StoreCart> ) entityManager.createQuery("from StoreCart where store=? and status='ACTIVE'").setParameter(1, storeId).getResultList();
+		return (List<StoreCart> ) entityManager.createQuery("from StoreCart where store=?1 and status='ACTIVE'").setParameter(1, storeId).getResultList();
 	}
 	
 	public List<StoreCart> findAll(){

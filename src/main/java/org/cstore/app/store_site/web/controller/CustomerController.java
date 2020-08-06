@@ -59,7 +59,7 @@ public class CustomerController {
 
 	@GetMapping("/{id}")
 	public Customer findCustomerById(@PathVariable Long customerId) {
-		return customerService.findById(customerId);
+		return customerService.findById(customerId).get();
 	}
 
 	@GetMapping("/{userName}")

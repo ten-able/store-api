@@ -41,8 +41,8 @@ public class CustomerService {
 		return custRepo.save(customer);
 	}
 
-	public Customer findById(Long customerId) {
-		return custRepo.findById(customerId).get();
+	public Optional<Customer> findById(Long customerId) {
+		return custRepo.findById(customerId);
 	}
 
 	public Customer updateCustomer(Customer customer) {

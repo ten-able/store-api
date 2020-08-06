@@ -45,8 +45,8 @@ public class Product implements Serializable {
 	private Integer quantityAvailable;
 
 	//bi-directional many-to-one association to StoreProduct
-	@OneToMany(mappedBy="product")
-	private Set<StoreProduct> storeProducts;
+//	@OneToMany(mappedBy="product",fetch = FetchType.LAZY)
+//	private Set<StoreProduct> storeProducts;
 
 	public Product() {
 	}
@@ -123,26 +123,26 @@ public class Product implements Serializable {
 		this.quantityAvailable = quantityAvailable;
 	}
 
-	public Set<StoreProduct> getStoreProducts() {
-		return this.storeProducts;
-	}
+//	public Set<StoreProduct> getStoreProducts() {
+//		return this.storeProducts;
+//	}
+//
+//	public void setStoreProducts(Set<StoreProduct> storeProducts) {
+//		this.storeProducts = storeProducts;
+//	}
 
-	public void setStoreProducts(Set<StoreProduct> storeProducts) {
-		this.storeProducts = storeProducts;
-	}
-
-	public StoreProduct addStoreProduct(StoreProduct storeProduct) {
-		getStoreProducts().add(storeProduct);
-		storeProduct.setProduct(this);
-
-		return storeProduct;
-	}
-
-	public StoreProduct removeStoreProduct(StoreProduct storeProduct) {
-		getStoreProducts().remove(storeProduct);
-		storeProduct.setProduct(null);
-
-		return storeProduct;
-	}
+//	public StoreProduct addStoreProduct(StoreProduct storeProduct) {
+//		getStoreProducts().add(storeProduct);
+//		storeProduct.setProduct(this);
+//
+//		return storeProduct;
+//	}
+//
+//	public StoreProduct removeStoreProduct(StoreProduct storeProduct) {
+//		getStoreProducts().remove(storeProduct);
+//		storeProduct.setProduct(null);
+//
+//		return storeProduct;
+//	}
 
 }

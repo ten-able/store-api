@@ -2,18 +2,24 @@ package org.cstore.app.store_site.service;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
 import org.cstore.app.store_site.repo.CartItemsRepository;
 import org.cstore.app.store_site.repo.CartRepository;
+import org.cstore.app.store_site.repo.CustomerRepository;
 import org.cstore.app.store_site.repo.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import com.cstore.app.store_site.dao.CartDao;
 import com.cstore.app.store_site.entity.CartItem;
+import com.cstore.app.store_site.entity.Customer;
 import com.cstore.app.store_site.entity.Store;
 import com.cstore.app.store_site.entity.StoreCart;
 
@@ -27,8 +33,28 @@ public class CartService {
 	@Autowired
 	StoreRepository storeRepo;
 	
+	@Autowired
+	CustomerRepository customerRepo;
+	
+	
+	
 //	@Autowired
 //	CartItemsRepository cartItemRepo;
+	
+	public StoreCart createStoreCart(CartDao cart){
+		StoreCart storeCart = new StoreCart();
+		if(cart.getCustomerId()!= null) {
+			Optional<Customer> customer = customerRepo.findById(cart.getCustomerId());
+			if(customer.isPresent())
+			storeCart.setCustomer(customer.get());
+		}
+		if(cart.getStoreId() != null) {
+			Optional<Store> store = storeRepo.findById(cart.getStoreId());
+			if(store.isPresent())
+			storeCart.setStore(store.get());
+		}
+		return createCart(storeCart);
+	}
 	
 	
 	public StoreCart createCart(StoreCart  cart) {
@@ -69,7 +95,9 @@ public class CartService {
 	}
 	
 	public StoreCart findCartById(Long cartId) {
-		return cartRepo.findById(cartId).get();
+		StoreCart storeCart = cartRepo.findById(cartId).get();
+		storeCart.setCartItems(storeCart.getCartItems());
+		return storeCart;
 	}
 	
 	public StoreCart cartPurchased(Long cartId) {
@@ -81,6 +109,14 @@ public class CartService {
 
 	public List<StoreCart> findAll() {
 		return cartRepo.findAll();
+	}
+	
+	public Set<CartItem> findCartItemsByCartId(Long cartId){
+		Optional<StoreCart> cart = cartRepo.findById(cartId);
+		if(cart.isPresent())
+			return cart.get().getCartItems();
+		else
+			return new HashSet<CartItem>();
 	}
 
 }

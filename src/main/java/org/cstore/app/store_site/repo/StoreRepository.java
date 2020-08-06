@@ -28,7 +28,7 @@ public class StoreRepository {
 	}
 	
 	public Optional<Store> findById(Long storeId) {
-		return (Optional<Store>)entityManager.createQuery("from Store where store_id=?").setParameter(1, storeId).getSingleResult();
+		return Optional.of((Store)entityManager.createQuery("from Store where store_id=?1").setParameter(1, storeId).getSingleResult());
 	}
 	
 	public List<Store> findAll() {
@@ -36,7 +36,7 @@ public class StoreRepository {
 	}
 	
 	public boolean deleteStore(Long storeId) {
-		int updatedRecords = entityManager.createQuery("update store set status='DELETED'  where store_id=?").executeUpdate();
+		int updatedRecords = entityManager.createQuery("update store set status='DELETED'  where store_id=?1").executeUpdate();
 		return updatedRecords>0 ? true :  false;
 	}
 	
