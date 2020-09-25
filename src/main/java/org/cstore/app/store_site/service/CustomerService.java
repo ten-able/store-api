@@ -56,5 +56,9 @@ public class CustomerService {
 		return customer;
 	}
 	
+//	public boolean registerCustomer(Customer customer) {
+//		customer.setCreatedOn(new  Timestamp(Calendar.getInstance().getTimeInMillis()));
+//		Customer save = custRepo.save(customer);
+//	}
 
 }

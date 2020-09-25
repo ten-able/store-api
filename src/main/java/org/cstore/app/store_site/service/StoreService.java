@@ -11,6 +11,7 @@ import org.cstore.app.store_site.repo.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cstore.app.store_site.dao.SearchStoreDAO;
 import com.cstore.app.store_site.entity.Store;
 import com.cstore.app.store_site.entity.StoreProduct;
 
@@ -61,6 +62,10 @@ public class StoreService {
 	
 	public List<StoreProduct> findStoreProductByStoreId(Long storeId) {
 		return storeProductRepo.findProductsByStore(storeId);
+	}
+	
+	public List<Store>  searchStoresByZip(SearchStoreDAO searchDao){
+		return  storeRepo.searchStores(searchDao);
 	}
 
 

@@ -35,6 +35,8 @@ public class Customer implements Serializable {
 
 	@Column(name="last_login")
 	private Timestamp lastLogin;
+	
+
 
 	//bi-directional many-to-one association to AOrder
 	@OneToMany(mappedBy="customer")
@@ -138,5 +140,17 @@ public class Customer implements Serializable {
 
 		return storeCart;
 	}
+
+//	@Column(name="status")
+//	private String status;
+//	public String getStatus() {
+//		return status;
+//	}
+//
+//	public void setStatus(String status) {
+//		this.status = status;
+//	}
+	
+	
 
 }

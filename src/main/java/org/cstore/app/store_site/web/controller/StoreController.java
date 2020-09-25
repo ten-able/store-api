@@ -2,6 +2,7 @@ package org.cstore.app.store_site.web.controller;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
+import java.util.Base64;
 import java.util.List;
 
 import org.cstore.app.store_site.service.StoreService;
@@ -17,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cstore.app.store_site.dao.SearchStoreDAO;
 import com.cstore.app.store_site.dao.StoreProductDao;
 import com.cstore.app.store_site.entity.Product;
 import com.cstore.app.store_site.entity.Store;
 import com.cstore.app.store_site.entity.StoreProduct;
+import com.google.gson.Gson;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -78,5 +81,11 @@ public class StoreController {
 	public List<StoreProduct> findStoreProductsByStoreId(@PathVariable Long storeId) {
 		return storeService.findStoreProductByStoreId(storeId);
 	}
-
+	
+	@PostMapping("/search")
+	public List<Store> searchStores(@RequestBody SearchStoreDAO searchDao){
+		List<Store> searchResults = storeService.searchStoresByZip(searchDao);
+		return searchResults;
+		
+	}
 }

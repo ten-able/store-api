@@ -72,11 +72,11 @@ public class Store implements Serializable {
 	private Set<StoreCart> storeCarts;
 
 	//bi-directional many-to-one association to StoreProduct
-	@OneToMany(mappedBy="store")
+	@OneToMany(mappedBy="store",fetch = FetchType.LAZY)
 	private Set<StoreProduct> storeProducts;
 
 	//bi-directional many-to-one association to StoreUser
-	@OneToMany(mappedBy="store")
+	@OneToMany(mappedBy="store",fetch = FetchType.LAZY)
 	private Set<StoreUser> storeUsers;
 
 	public Store() {

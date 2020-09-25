@@ -1,7 +1,5 @@
 package org.cstore.app.store_site.repo;
 
-import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,8 +8,8 @@ import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.cstore.app.store_site.entity.Store;
 import com.cstore.app.store_site.entity.StoreProduct;
+
 
 @Repository
 public class StoreProductRepository {
@@ -46,7 +44,9 @@ public class StoreProductRepository {
 		return (List<StoreProduct>)entityManager.createQuery("from StoreProduct where store=?").setParameter(1, storeId).getResultList();
 
 	}
-	
+
+
+
 	
 
 }

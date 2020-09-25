@@ -30,6 +30,15 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/customers")
 @Slf4j
 @CrossOrigin(origins = "http://localhost:4200")
+/**
+ * 
+ * @author nagadheeranreddyseelam
+ * Need to implement check for username availability
+ * Need to implement recaptcha
+ * Need to implement confirm email for registration
+ * 
+ *
+ */
 public class CustomerController {
 
 	@Autowired
@@ -71,6 +80,22 @@ public class CustomerController {
 	@ResponseStatus(code = HttpStatus.OK)
 	public Customer updateCustomer(@RequestBody Customer customer) {
 		return customerService.updateCustomer(customer);
+	}
+
+	@PostMapping("/register")
+	@ResponseStatus(code=HttpStatus.OK)
+	public Customer registerCustomer(@RequestBody CustomerRegisterDao  customerDao) {
+		//@TODO - Add full registration here. Temporarily creating user directly
+		//Need to add registration table. once user created, user will be in NOTCONFIRMED state.
+		//Check for duplicate username/email
+		//email sent to user
+		//user will click on email to confirm and then user will be in ACTIVE state.
+		Customer customer = new Customer();
+		customer.setCustEmail(customerDao.getEmail());
+		customer.setCustUname(customerDao.getUsername());
+		customer.setCustPwd(customerDao.getPassword());
+		
+		 return customerService.createCustomer(customer);
 	}
 
 }
