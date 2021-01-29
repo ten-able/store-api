@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.cstore.app.store_site.entity.CartItem;
 import com.cstore.app.store_site.entity.CartItemPK;
+import com.cstore.app.store_site.entity.StoreCart;
 
 @Repository
 public class CartItemsRepository {
@@ -27,9 +28,19 @@ public class CartItemsRepository {
 		return item;
 	}
 	
+	public CartItem update(CartItem item) {
+		entityManager.merge(item);
+		return item;
+	}
+	
 	public List<CartItem> findCartItemsByCartId(Long cartId){
-		return  (List<CartItem>) entityManager.createQuery("from CartItem where storeCart=?").setParameter(1, cartId).getResultList();
+		StoreCart cart = new StoreCart();
+		cart.setCartId(cartId);
+		return  (List<CartItem>) entityManager.createQuery("from CartItem where storeCart=?1").setParameter(1, cart).getResultList();
 		
 	}
 
+	public void deleteItem(CartItem item) {
+		entityManager.remove(item);
+	}
 }

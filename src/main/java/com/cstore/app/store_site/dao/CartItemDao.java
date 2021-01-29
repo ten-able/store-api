@@ -9,5 +9,12 @@ public class CartItemDao {
 	public Integer quantity;
 	public double itemPrice;
 	public Long productId;
+	public String productName;
+	public String productUrl;
+	public String iconUrl;
+	
+	
+	
+	
 
 }

@@ -35,8 +35,6 @@ public class Customer implements Serializable {
 
 	@Column(name="last_login")
 	private Timestamp lastLogin;
-	
-
 
 	//bi-directional many-to-one association to AOrder
 	@OneToMany(mappedBy="customer")

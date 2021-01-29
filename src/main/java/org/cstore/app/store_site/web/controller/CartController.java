@@ -12,6 +12,7 @@ import org.cstore.app.store_site.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,8 +52,12 @@ public class CartController {
 	@PostMapping("")
     @ResponseStatus(CREATED)
 	public StoreCart createStoreCart(@RequestBody CartDao cart){
-		
 		return cartService.createStoreCart(cart);
+	}
+	
+	@GetMapping("/{customerId}/{storeId}")
+	public CartDao findCartByCustomerIdAndStoreId(@PathVariable Long customerId, @PathVariable Long storeId){
+		return cartService.findCartByCustomerIdAndStoreId(customerId, storeId);
 	}
 	
 	@GetMapping("/customer/{customerId}")
@@ -88,13 +93,52 @@ public class CartController {
 		CartItem cartItem  = new CartItem();
 		CartItemPK pk = new CartItemPK();
 		pk.setCartId(cartId);
-		StoreProduct productId = storeService.findStoreProductById(itemDao.getProductId());
-		pk.setStoreProductId(productId.getStoreProductId());
+		StoreProduct storeProduct = storeService.findStoreProductById(itemDao.getProductId());
+		pk.setStoreProductId(storeProduct.getStoreProductId());
 		cartItem.setId(pk);
-		cartItem.setItemPrice(itemDao.itemPrice);
+		cartItem.setItemPrice(storeProduct.getPrice());
 		cartItem.setQuantity(itemDao.getQuantity());
 		//Need to add a condition to verify  the store id and store product id are valid
 		return cartService.saveCartWithCartItems(cartId, itemDao.getStoreId(), cartItem);
+	}
+	
+	@DeleteMapping("/{cartId}/cartitems/{storeProductId}")
+	@ResponseStatus(code = HttpStatus.OK)
+	public StoreCart removeCartItemFromCart(@PathVariable Long cartId,@PathVariable Long storeProductId) {
+		
+		CartItem cartItem  = new CartItem();
+		CartItemPK pk = new CartItemPK();
+		pk.setCartId(cartId);
+		StoreProduct storeProduct = storeService.findStoreProductById(storeProductId);
+		pk.setStoreProductId(storeProduct.getStoreProductId());
+		cartItem.setId(pk);
+		//cartItem.setItemPrice(storeProduct.getPrice());
+		//cartItem.setQuantity(itemDao.getQuantity());
+		//Need to add a condition to verify  the store id and store product id are valid
+		//return cartService.saveCartWithCartItems(cartId, itemDao.getStoreId(), cartItem);
+		return cartService.removeCartItemFromCart(cartId, cartItem);
+	}
+	
+	@PutMapping("/{cartId}/cartitems")
+	@ResponseStatus(code = HttpStatus.OK)
+	public StoreCart updateCartItem(@PathVariable Long cartId, @RequestBody CartItemDao itemDao) {
+		
+		CartItem cartItem  = new CartItem();
+		CartItemPK pk = new CartItemPK();
+		pk.setCartId(cartId);
+		StoreProduct storeProduct = storeService.findStoreProductById(itemDao.getProductId());
+		pk.setStoreProductId(storeProduct.getStoreProductId());
+		cartItem.setId(pk);
+		cartItem.setItemPrice(storeProduct.getPrice());
+		cartItem.setQuantity(itemDao.getQuantity());
+		//Need to add a condition to verify  the store id and store product id are valid
+		//return cartService.saveCartWithCartItems(cartId, itemDao.getStoreId(), cartItem);
+		return cartService.updateCarItem(cartId, cartItem);
+	}
+	
+	@PostMapping("/{cartId}/checkout")
+	public boolean checkoutCart(@PathVariable Long cartId, @RequestBody CartDao cartDao ) {
+		return true;
 	}
 
 }

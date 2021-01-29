@@ -29,6 +29,10 @@ public class StoreProduct implements Serializable {
 
 	@Column(name="quantity_available")
 	private Integer quantityAvailable;
+	
+
+	@Column(name="price")
+	private double price;
 
 	@Column(length=50)
 	private String status;
@@ -176,4 +180,14 @@ public class StoreProduct implements Serializable {
 		this.store = store;
 	}
 
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	
+	
 }

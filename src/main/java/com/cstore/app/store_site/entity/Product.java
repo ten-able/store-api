@@ -33,7 +33,7 @@ public class Product implements Serializable {
 	private String imageUrl;
 
 	@Column(nullable=false)
-	private Integer price;
+	private double price;
 
 	@Column(name="product_name", nullable=false, length=250)
 	private String productName;
@@ -91,11 +91,11 @@ public class Product implements Serializable {
 		this.imageUrl = imageUrl;
 	}
 
-	public Integer getPrice() {
+	public double getPrice() {
 		return this.price;
 	}
 
-	public void setPrice(Integer price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
